@@ -124,19 +124,35 @@ class _MyHomePageState extends State<MyHomePage> {
         '^\$|^(0|([1-9][0-9]{0,}))(\\.[0-9]{0,})?\$');
     final exemptDisplay = Column(
       children: <Widget>[
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Exempt',
-            style: TextStyle(color: Colors.deepPurple),
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            ImageIcon(
+              AssetImage('assets/icons/payment.png'),
+              color: Colors.deepPurple,
+              size: 26.0,
+              semanticLabel: 'Exempt icon',
+            ),
+            SizedBox(width: 8.0),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Exempt',
+                style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.w600),
+              ),
+            ),
+          ],
         ),
         SizedBox(height: 4.0),
         Align(
           alignment: Alignment.centerLeft,
-          child: Text(
-            'ZMW ' + _exempt.toStringAsFixed(2),
-            style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w400, fontSize: 25),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(30.0, 0, 0, 0 ),
+            child: Text(
+              'ZMW ' + _exempt.toStringAsFixed(2),
+              style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w400, fontSize: 25),
+            ),
           ),
         ),
       ],
@@ -162,74 +178,22 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     final taxableIncomeDisplay = Column(
       children: <Widget>[
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Taxable Income',
-            style: TextStyle(color: Colors.deepPurple),
-          ),
-        ),
-        SizedBox(height: 4.0),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'ZMW $_taxable',
-            style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w400, fontSize: 25),
-          ),
-        ),
-      ],
-    );
-    final pensionContributionDisplay = Column(
-      children: <Widget>[
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             ImageIcon(
-              AssetImage('assets/icons/money.png'),
+              AssetImage('assets/icons/diamond.png'),
               color: Colors.deepPurple,
-              size: 24.0,
-              semanticLabel: 'Pension icon',
+              size: 26.0,
+              semanticLabel: 'diamond icon',
             ),
-            SizedBox(width: 4.0),
+            SizedBox(width: 8.0),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Pension at 5%',
-                style: TextStyle(color: Colors.deepPurple),
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: 4.0),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'ZMW $_pension',
-            style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w400, fontSize: 25),
-          ),
-        ),
-      ],
-    );
-    final medicalContributionDisplay = Column(
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          // mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            ImageIcon(
-              AssetImage('assets/icons/heart.png'),
-              color: Colors.deepPurple,
-              size: 24.0,
-              semanticLabel: 'NHI icon',
-            ),
-            SizedBox(width: 4.0),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Medical at 1%',
-                style: TextStyle(color: Colors.deepPurple),
+                'Taxable Income',
+                style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.w600),
               ),
             ),
           ],
@@ -238,7 +202,78 @@ class _MyHomePageState extends State<MyHomePage> {
         Align(
           alignment: Alignment.centerLeft,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(28.0, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(30.0, 0, 0, 0),
+            child: Text(
+              'ZMW $_taxable',
+              style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w400, fontSize: 25),
+            ),
+          ),
+        ),
+      ],
+    );
+    final pensionContributionDisplay = Column(
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            ImageIcon(
+              AssetImage('assets/icons/money.png'),
+              color: Colors.deepPurple,
+              size: 26.0,
+              semanticLabel: 'Pension icon',
+            ),
+            SizedBox(width: 8.0),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Pension at 5%',
+                style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.w600),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 4.0),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(30.0, 0, 0, 0),
+            child: Text(
+              'ZMW $_pension',
+              style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w400, fontSize: 25),
+            ),
+          ),
+        ),
+      ],
+    );
+    final medicalContributionDisplay = Column(
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          // mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ImageIcon(
+              AssetImage('assets/icons/heart.png'),
+              color: Colors.deepPurple,
+              size: 26.0,
+              semanticLabel: 'NHI icon',
+            ),
+            SizedBox(width: 8.0),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Medical at 1%',
+                style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.w600),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 4.0),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(30.0, 0, 0, 0),
             child: Text(
               'ZMW $_medical',
               style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w400, fontSize: 25),
@@ -249,19 +284,35 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     final taxesDueDisplay = Column(
       children: <Widget>[
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Tax',
-            style: TextStyle(color: Colors.deepPurple),
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            ImageIcon(
+              AssetImage('assets/icons/tax.png'),
+              color: Colors.deepPurple,
+              size: 26.0,
+              semanticLabel: 'Tax icon',
+            ),
+            SizedBox(width: 8.0),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Tax',
+                style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.w600),
+              ),
+            ),
+          ],
         ),
         SizedBox(height: 4.0),
         Align(
           alignment: Alignment.centerLeft,
-          child: Text(
-            'ZMW $_duesPayable',
-            style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w400, fontSize: 25),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(30.0, 0, 0, 0),
+            child: Text(
+              'ZMW $_duesPayable',
+              style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w400, fontSize: 25),
+            ),
           ),
         ),
       ],
@@ -318,7 +369,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             'Take Home Amount',
-                            style: TextStyle(color: Colors.deepPurple),
+                            style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.w600),
                           ),
                         ),
                         SizedBox(height: 8),
@@ -330,6 +381,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontFamily: 'Assistant', 
                               fontWeight: FontWeight.w600, 
                               fontSize: 37,
+                              color: Colors.black87,
                             ),
                           ),
                         ),
@@ -357,12 +409,6 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 child: Row(
                   children: <Widget>[
-                    Icon(
-                      Icons.pie_chart_outlined,
-                      color: Colors.deepPurple,
-                      size: 24,
-                      semanticLabel: 'Label',
-                    ),
                     Expanded(child: pensionContributionDisplay),
                     Expanded(child: medicalContributionDisplay),
                   ],
