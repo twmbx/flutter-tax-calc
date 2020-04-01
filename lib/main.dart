@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   var _rates = [0.25, 0.3, 0.37];
 
   void _changeNumber(salary) {
-    print(salary);
+    // print(salary);
     salary = double.parse(salary);
     setState(() {
       if (_isTaxable(salary)) {
@@ -131,6 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
             style: TextStyle(color: Colors.deepPurple),
           ),
         ),
+        SizedBox(height: 4.0),
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
@@ -149,11 +150,12 @@ class _MyHomePageState extends State<MyHomePage> {
             style: TextStyle(color: Colors.deepPurple),
           ),
         ),
+        SizedBox(height: 4.0),
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
             'ZMW $_takehome',
-            style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w700, fontSize: 25),
+            style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w700, fontSize: 30),
           ),
         ),
       ],
@@ -167,6 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
             style: TextStyle(color: Colors.deepPurple),
           ),
         ),
+        SizedBox(height: 4.0),
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
@@ -178,13 +181,27 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     final pensionContributionDisplay = Column(
       children: <Widget>[
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Pension at 5%',
-            style: TextStyle(color: Colors.deepPurple),
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            ImageIcon(
+              AssetImage('assets/icons/money.png'),
+              color: Colors.deepPurple,
+              size: 24.0,
+              semanticLabel: 'Pension icon',
+            ),
+            SizedBox(width: 4.0),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Pension at 5%',
+                style: TextStyle(color: Colors.deepPurple),
+              ),
+            ),
+          ],
         ),
+        SizedBox(height: 4.0),
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
@@ -196,18 +213,36 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     final medicalContributionDisplay = Column(
       children: <Widget>[
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Medical at 1%',
-            style: TextStyle(color: Colors.deepPurple),
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          // mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ImageIcon(
+              AssetImage('assets/icons/heart.png'),
+              color: Colors.deepPurple,
+              size: 24.0,
+              semanticLabel: 'NHI icon',
+            ),
+            SizedBox(width: 4.0),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Medical at 1%',
+                style: TextStyle(color: Colors.deepPurple),
+              ),
+            ),
+          ],
         ),
+        SizedBox(height: 4.0),
         Align(
           alignment: Alignment.centerLeft,
-          child: Text(
-            'ZMW $_medical',
-            style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w400, fontSize: 25),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(28.0, 0, 0, 0),
+            child: Text(
+              'ZMW $_medical',
+              style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w400, fontSize: 25),
+            ),
           ),
         ),
       ],
@@ -221,6 +256,7 @@ class _MyHomePageState extends State<MyHomePage> {
             style: TextStyle(color: Colors.deepPurple),
           ),
         ),
+        SizedBox(height: 4.0),
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
@@ -237,85 +273,125 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          // mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Expanded(
-                  child: TextField(
-                    onChanged: (text) {
-                      print(text);
-                      _changeNumber(text);
-                    },
-                    decoration: InputDecoration(
-                      labelText: 'Salary',
-                      prefixText: 'ZMW ',
-                      helperText: "enter your monthly salary"
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            // mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Expanded(
+                    child: TextField(
+                      onChanged: (text) {
+                        // print(text);
+                        _changeNumber(text);
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Salary',
+                        prefixText: 'ZMW ',
+                        helperText: "enter your monthly salary"
+                      ),
+                      keyboardType: TextInputType.numberWithOptions(
+                        decimal: true,
+                        signed: false,
+                      ),
+                      inputFormatters: [_amountValidator],
+                      // autofocus: true,
+                      focusNode: myFocusNode,
+                      style: TextStyle(fontSize: 35),
+                      maxLength: 8,
                     ),
-                    keyboardType: TextInputType.numberWithOptions(
-                      decimal: true,
-                      signed: false,
+                  ),
+                ],
+              ),
+              Center(
+                child: Card(
+                  margin: EdgeInsets.symmetric(vertical: 24.0),
+                  elevation: 2.0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: <Widget>[
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Take Home Amount',
+                            style: TextStyle(color: Colors.deepPurple),
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'ZMW $_takehome',
+                            style: TextStyle(
+                              fontFamily: 'Assistant', 
+                              fontWeight: FontWeight.w600, 
+                              fontSize: 37,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    inputFormatters: [_amountValidator],
-                    // autofocus: true,
-                    focusNode: myFocusNode,
-                    style: TextStyle(fontSize: 35),
-                    maxLength: 8,
                   ),
                 ),
-              ],
-            ),
-            // Column(
-            //   children: <Widget>[
-            Container(
-              child: Row(
-                children: <Widget>[
-                  Expanded(child: exemptDisplay),
-                  Expanded(child: taxableIncomeDisplay),
-                ],
               ),
-              padding: const EdgeInsets.symmetric(vertical:16.0),
-              decoration: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(width: 1.0, color: Colors.black12),
+              // Column(
+              //   children: <Widget>[
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(child: exemptDisplay),
+                    Expanded(child: taxableIncomeDisplay),
+                  ],
+                ),
+                padding: const EdgeInsets.symmetric(vertical:16.0),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 1.0, color: Colors.black12),
+                  ),
                 ),
               ),
-            ),
-            Container(
-              child: Row(
-                children: <Widget>[
-                  Expanded(child: pensionContributionDisplay),
-                  Expanded(child: medicalContributionDisplay),
-                ],
-              ),
-              padding: const EdgeInsets.symmetric(vertical:16.0),
-              decoration: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(width: 1.0, color: Colors.black12),
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.pie_chart_outlined,
+                      color: Colors.deepPurple,
+                      size: 24,
+                      semanticLabel: 'Label',
+                    ),
+                    Expanded(child: pensionContributionDisplay),
+                    Expanded(child: medicalContributionDisplay),
+                  ],
+                ),
+                padding: const EdgeInsets.symmetric(vertical:16.0),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 1.0, color: Colors.black12),
+                  ),
                 ),
               ),
-            ),
-            Container(
-              child: Row(
-                children: <Widget>[
-                  Expanded(child: taxesDueDisplay),
-                  Expanded(child: takeHomeDisplay),
-                ],
-              ),
-              padding: const EdgeInsets.symmetric(vertical:16.0),
-              decoration: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(width: 1.0, color: Colors.black12),
+              Container(
+                child: Row(
+                  children: <Widget>[
+                    Expanded(child: taxesDueDisplay),
+                    // Expanded(child: takeHomeDisplay),
+                  ],
+                ),
+                padding: const EdgeInsets.symmetric(vertical:16.0),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 1.0, color: Colors.black12),
+                  ),
                 ),
               ),
-            ),
-            //   ],
-            // ),
-          ],
+              //   ],
+              // ),
+            ],
+          ),
         ),
       ),
     );
