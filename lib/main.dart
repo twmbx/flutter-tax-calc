@@ -157,24 +157,36 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ],
     );
-    final takeHomeDisplay = Column(
-      children: <Widget>[
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Take Home',
-            style: TextStyle(color: Colors.deepPurple),
-          ),
+    final takeHomeDisplay = Card(
+      margin: EdgeInsets.symmetric(vertical: 24.0, horizontal: 4),
+      elevation: 3.0,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: <Widget>[
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Take Home Amount',
+                style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.w600),
+              ),
+            ),
+            SizedBox(height: 8),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'ZMW $_takehome',
+                style: TextStyle(
+                  fontFamily: 'Assistant',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 37,
+                  color: Colors.black87,
+                ),
+              ),
+            ),
+          ],
         ),
-        SizedBox(height: 4.0),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'ZMW $_takehome',
-            style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w700, fontSize: 30),
-          ),
-        ),
-      ],
+      ),
     );
     final taxableIncomeDisplay = Column(
       children: <Widget>[
@@ -356,37 +368,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               Center(
-                child: Card(
-                  margin: EdgeInsets.symmetric(vertical: 24.0),
-                  elevation: 2.0,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: <Widget>[
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Take Home Amount',
-                            style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'ZMW $_takehome',
-                            style: TextStyle(
-                              fontFamily: 'Assistant', 
-                              fontWeight: FontWeight.w600, 
-                              fontSize: 37,
-                              color: Colors.black87,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                child: takeHomeDisplay,
               ),
               Container(
                 child: Row(
