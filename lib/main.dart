@@ -327,7 +327,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            // mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -336,7 +335,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   Expanded(
                     child: TextField(
                       onChanged: (text) {
-                        // print(text);
                         _changeNumber(text);
                       },
                       decoration: InputDecoration(
@@ -390,8 +388,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
-              // Column(
-              //   children: <Widget>[
               Container(
                 child: Row(
                   children: <Widget>[
@@ -424,7 +420,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Row(
                   children: <Widget>[
                     Expanded(child: taxesDueDisplay),
-                    // Expanded(child: takeHomeDisplay),
                   ],
                 ),
                 padding: const EdgeInsets.symmetric(vertical:16.0),
@@ -434,8 +429,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
-              //   ],
-              // ),
             ],
           ),
         ),
