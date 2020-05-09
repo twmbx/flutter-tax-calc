@@ -42,9 +42,13 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
+  assets:
+   - assets/icons/money.png
+   - assets/icons/vault.png
+   - assets/icons/heart.png
+   - assets/icons/taxable.png
+   - assets/icons/tax.png
+   - assets/icons/wallet.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -80,5 +84,5 @@ flutter:
         - asset: fonts/Assistant-Bold.ttf
         - asset: fonts/Assistant-SemiBold.ttf
         - asset: fonts/Assistant-ExtraBold.ttf
-        
+
 
