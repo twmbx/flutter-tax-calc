@@ -30,7 +30,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   FocusNode myFocusNode;
 
-  double _salary = 0;
   double _exempt = 3300;
   String _takehome = '0.00';
   String _pension = '0.00';
@@ -42,26 +41,24 @@ class _MyHomePageState extends State<MyHomePage> {
   var _rates = [0.25, 0.3, 0.37];
 
   void _changeNumber(salary) {
-    // print(salary);
     salary = double.parse(salary);
     setState(() {
-      if (_isTaxable(salary)) {
-        _pension = (salary * 0.05).toStringAsFixed(2);
-        _medical = (salary * 0.01).toStringAsFixed(2);
+      double pensionDue = _calcNapsaContrib(salary);
+      double medicalDue = salary * 0.01;
+      _pension = pensionDue.toStringAsFixed(2);
+      _medical = medicalDue.toStringAsFixed(2);
 
+      if (_isTaxable(salary)) {
         double taxable = _getTaxableIncome(salary);
         _taxable = taxable.toStringAsFixed(2);
         double duesPayable = _calcTaxes(taxable);
         _duesPayable = duesPayable.toStringAsFixed(2);
-        _takehome =
-            ((salary - duesPayable) - (salary * 0.05) - (salary * 0.01))
-        .toStringAsFixed(2);
+        _takehome = (salary - (duesPayable + medicalDue + pensionDue))
+            .toStringAsFixed(2);
       } else {
         _taxable = '0.00';
-        _pension = '0.00';
-        _medical = '0.00';
-        _takehome = '0.00';
         _duesPayable = '0.00';
+        _takehome = (salary-(pensionDue + medicalDue)).toStringAsFixed(2);
       }
     });
   }
@@ -74,12 +71,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return (amount > 3300) ? true : false;
   }
 
-  double _getTaxPercentage(amount) {
-    return amount;
-  }
-
-  double calcNapsaContrib(amount) {
-    return amount * 0.05;
+  double _calcNapsaContrib(amount) {
+    double contrib = amount * 0.05;
+    return contrib > 1149.60 ? 1149.60 : contrib;
   }
 
   double _calcTaxes(tsal) {
@@ -139,7 +133,8 @@ class _MyHomePageState extends State<MyHomePage> {
               alignment: Alignment.centerLeft,
               child: Text(
                 'Exempt',
-                style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    color: Colors.deepPurple, fontWeight: FontWeight.w600),
               ),
             ),
           ],
@@ -148,10 +143,13 @@ class _MyHomePageState extends State<MyHomePage> {
         Align(
           alignment: Alignment.centerLeft,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(30.0, 0, 0, 0 ),
+            padding: const EdgeInsets.fromLTRB(30.0, 0, 0, 0),
             child: Text(
               'ZMW ' + _exempt.toStringAsFixed(2),
-              style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w400, fontSize: 25),
+              style: TextStyle(
+                  fontFamily: 'Assistant',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 25),
             ),
           ),
         ),
@@ -179,7 +177,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Take Home Amount',
-                    style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                        color: Colors.deepPurple, fontWeight: FontWeight.w600),
                   ),
                 ),
               ],
@@ -218,7 +217,8 @@ class _MyHomePageState extends State<MyHomePage> {
               alignment: Alignment.centerLeft,
               child: Text(
                 'Taxable Income',
-                style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    color: Colors.deepPurple, fontWeight: FontWeight.w600),
               ),
             ),
           ],
@@ -230,7 +230,10 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.fromLTRB(30.0, 0, 0, 0),
             child: Text(
               'ZMW $_taxable',
-              style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w400, fontSize: 25),
+              style: TextStyle(
+                  fontFamily: 'Assistant',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 25),
             ),
           ),
         ),
@@ -253,7 +256,8 @@ class _MyHomePageState extends State<MyHomePage> {
               alignment: Alignment.centerLeft,
               child: Text(
                 'Pension at 5%',
-                style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    color: Colors.deepPurple, fontWeight: FontWeight.w600),
               ),
             ),
           ],
@@ -265,7 +269,10 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.fromLTRB(30.0, 0, 0, 0),
             child: Text(
               'ZMW $_pension',
-              style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w400, fontSize: 25),
+              style: TextStyle(
+                  fontFamily: 'Assistant',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 25),
             ),
           ),
         ),
@@ -276,7 +283,6 @@ class _MyHomePageState extends State<MyHomePage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
-          // mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ImageIcon(
               AssetImage('assets/icons/heart.png'),
@@ -289,7 +295,8 @@ class _MyHomePageState extends State<MyHomePage> {
               alignment: Alignment.centerLeft,
               child: Text(
                 'Medical at 1%',
-                style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    color: Colors.deepPurple, fontWeight: FontWeight.w600),
               ),
             ),
           ],
@@ -301,7 +308,10 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.fromLTRB(30.0, 0, 0, 0),
             child: Text(
               'ZMW $_medical',
-              style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w400, fontSize: 25),
+              style: TextStyle(
+                  fontFamily: 'Assistant',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 25),
             ),
           ),
         ),
@@ -324,7 +334,8 @@ class _MyHomePageState extends State<MyHomePage> {
               alignment: Alignment.centerLeft,
               child: Text(
                 'Tax',
-                style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    color: Colors.deepPurple, fontWeight: FontWeight.w600),
               ),
             ),
           ],
@@ -336,7 +347,10 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.fromLTRB(30.0, 0, 0, 0),
             child: Text(
               'ZMW $_duesPayable',
-              style: TextStyle(fontFamily: 'Assistant', fontWeight: FontWeight.w400, fontSize: 25),
+              style: TextStyle(
+                  fontFamily: 'Assistant',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 25),
             ),
           ),
         ),
@@ -363,10 +377,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         _changeNumber(text);
                       },
                       decoration: InputDecoration(
-                        labelText: 'Salary',
-                        prefixText: 'ZMW ',
-                        helperText: "enter your monthly salary"
-                      ),
+                          labelText: 'Salary',
+                          prefixText: 'ZMW ',
+                          helperText: "enter your monthly salary"),
                       keyboardType: TextInputType.numberWithOptions(
                         decimal: true,
                         signed: false,
@@ -390,7 +403,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Expanded(child: taxableIncomeDisplay),
                   ],
                 ),
-                padding: const EdgeInsets.symmetric(vertical:16.0),
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
                 decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(width: 1.0, color: Colors.black12),
@@ -404,7 +417,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Expanded(child: medicalContributionDisplay),
                   ],
                 ),
-                padding: const EdgeInsets.symmetric(vertical:16.0),
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
                 decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(width: 1.0, color: Colors.black12),
@@ -417,7 +430,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Expanded(child: taxesDueDisplay),
                   ],
                 ),
-                padding: const EdgeInsets.symmetric(vertical:16.0),
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
                 decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(width: 1.0, color: Colors.black12),
