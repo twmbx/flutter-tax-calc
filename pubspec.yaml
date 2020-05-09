@@ -44,10 +44,11 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
    - assets/icons/money.png
-   - assets/icons/diamond.png
+   - assets/icons/vault.png
    - assets/icons/heart.png
-   - assets/icons/payment.png
+   - assets/icons/taxable.png
    - assets/icons/tax.png
+   - assets/icons/wallet.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -83,5 +84,5 @@ flutter:
         - asset: fonts/Assistant-Bold.ttf
         - asset: fonts/Assistant-SemiBold.ttf
         - asset: fonts/Assistant-ExtraBold.ttf
-        
+
 

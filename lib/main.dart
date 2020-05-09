@@ -129,7 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             ImageIcon(
-              AssetImage('assets/icons/payment.png'),
+              AssetImage('assets/icons/vault.png'),
               color: Colors.deepPurple,
               size: 26.0,
               semanticLabel: 'Exempt icon',
@@ -164,12 +164,25 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Take Home Amount',
-                style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.w600),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                ImageIcon(
+                  AssetImage('assets/icons/wallet.png'),
+                  color: Colors.deepPurple,
+                  size: 26.0,
+                  semanticLabel: 'wallet icon',
+                ),
+                SizedBox(width: 8.0),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Take Home Amount',
+                    style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 8),
             Align(
@@ -195,10 +208,10 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             ImageIcon(
-              AssetImage('assets/icons/diamond.png'),
+              AssetImage('assets/icons/taxable.png'),
               color: Colors.deepPurple,
               size: 26.0,
-              semanticLabel: 'diamond icon',
+              semanticLabel: 'money cut icon',
             ),
             SizedBox(width: 8.0),
             Align(
